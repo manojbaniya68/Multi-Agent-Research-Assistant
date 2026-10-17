@@ -4,8 +4,6 @@ from langchain_tavily import TavilySearch
 from rich import print
 from bs4 import BeautifulSoup
 import requests
-from pprint import pprint
-import os
 
 load_dotenv()
 
@@ -53,6 +51,8 @@ def scrap_url(url: str) -> str:
     return f"Page title: {title}\n\nContent:\n{content}"
 
 
-print(scrap_url.invoke("https://en.wikipedia.org/wiki/Artificial_intelligence"))
+
+
+
 
 

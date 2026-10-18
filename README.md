@@ -4,7 +4,7 @@ Research a topic with a coordinated AI workflow that searches the web, reads a r
 
 ## Project structure
 
-- `GUI.py` — Streamlit interface for submitting topics and viewing or downloading results.
+- `streamlit_app.py` — Streamlit interface for submitting topics and viewing or downloading results.
 - `pipeline.py` — runs the research steps and returns their outputs.
 - `agents.py` — configures the Gemini model and the search, reader, writer, and critic agents.
 - `tools.py` — provides Tavily web search and webpage scraping.
@@ -29,10 +29,16 @@ Keep `.env` private; do not commit API keys.
 ## Start the Streamlit interface
 
 ```bash
-streamlit run GUI.py
+streamlit run streamlit_app.py
 ```
 
 Enter a focused research topic and select **Start research**. The results include the generated report, critic feedback, source links, search results, and reader notes. You can download the report as Markdown.
+
+### What you get
+
+- A report with an introduction, at least three key findings, a conclusion, and source URLs.
+- Critic feedback with scores, weaknesses, and suggested improvements.
+- Search output and reader notes to help you check how the report was assembled.
 
 ## Run from the terminal
 
@@ -48,5 +54,7 @@ python pipeline.py
 2. The reader agent selects a relevant result and extracts webpage content.
 3. The writer creates a report with an introduction, key findings, conclusion, and sources.
 4. The critic scores the report and suggests improvements.
+
+## Notes
 
 Search results and reports depend on external services and source availability. Verify important claims against the linked sources.

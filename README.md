@@ -1,6 +1,6 @@
 # Multi-Agent Research Assistant
 
-Research a topic with a coordinated AI workflow that searches the web, reads a relevant webpage, writes a structured report, and critiques the result. The Streamlit interface is in `GUI.py`.
+Research a topic with a coordinated AI workflow that searches the web, reads a relevant webpage, writes a structured report, and critiques the result. The Streamlit interface is in `streamlit_app.py`.
 
 ## Project structure
 

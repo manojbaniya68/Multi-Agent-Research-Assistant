@@ -3,18 +3,38 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
-from tools import web_serach, scrap_url
+from langchain.agents.middleware import ToolCallLimitMiddleware
+from tools import web_search, scrap_url
+
 
 load_dotenv()
 
 #loading model
-llm = ChatGoogleGenerativeAI(model="gemini-3.8-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-3.8-flash", temperature=0)
 
 #search agent
 def build_search_agent():
     return create_agent(
         model=llm,
-        tools=[web_serach]
+        tools=[web_search],
+        system_prompt = """
+            You are an autonomous web research agent.
+
+            1. Search for the user's topic using web_search.
+            2. Review the returned search results.
+            3. Perform another search only if necessary, within your tool-call limit.
+            4. Return the research findings AND the original source titles and URLs.
+            5. Never omit URLs returned by the search tool.
+            6. Never invent URLs.
+            7. Clearly separate findings from sources.
+            """,
+        middleware=[
+            ToolCallLimitMiddleware(
+                tool_name="web_search",
+                run_limit=3,
+                exit_behavior="continue",
+            )
+        ],
     )
 
 

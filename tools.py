@@ -15,10 +15,8 @@ def web_search(topic: str) -> str:
         max_results=3,
         topic="general"
     )
-    print("\n web search tool is called\n")
 
     search_result = tool.invoke({"query": topic})
-    print("\n search completed..\n")
     results = search_result['results']
     search_result_list = []
 
@@ -33,7 +31,6 @@ def web_search(topic: str) -> str:
 @tool
 def scrap_url(url: str) -> str:
     """Scrapes the information of provided urls and returns the meaningful content"""
-    print("\nweb scraping started..\n")
     response = requests.get(url, timeout=15, headers={"User-Agent" : "Mozilla/5.0"})
     soup = BeautifulSoup(response.text,"html.parser")
 
@@ -44,8 +41,6 @@ def scrap_url(url: str) -> str:
     # Extract the page title
     title = soup.title.get_text(strip=True) if soup.title else "No title"
     content = soup.get_text(" ", strip=True)
-
-    print("\nweb scraping endded..\n")
 
     if not content:
         return "No readable content found on this webpage."
